@@ -1,0 +1,66 @@
+<div *ngIf="!adminGotTheRole" class="col-sm-12">
+    <app-alert type="danger" dismiss="true" class="alert">
+        <h3>Vous ne posséde pas la permission d'ajouter un administrateur!<br>
+            Veuillez contacter votre administrateur pour cette permission</h3>
+    </app-alert>
+</div>
+<app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
+<div *ngIf="adminGotTheRole" class="row">
+    <div class="col-sm-12">
+        <app-card [options]="false" cardTitle="Information de l'administrateur">
+            <form autocomplete="off" [formGroup]="AddForm">
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Adresse Email</label>
+                            <input type="email" class="form-control" formControlName="email" required
+                                [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label style="font: bold;">Prénom</label>
+                            <input type="text" class="form-control" formControlName="prenom" required
+                                [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputNom1">Nom</label>
+                            <input type="text" class="form-control" formControlName="nom" required
+                                [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label for="exampleInputNumTel1">Numéro Téléphone</label>
+                            <input type="tel" class="form-control" formControlName="phoneNumber" required
+                                [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </app-card>
+    </div>
+    
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+        <div *ngIf="adminCanSeeRoles">
+            <app-roles></app-roles>
+        </div>
+
+        <button class="btn btn-primary" style="margin-right: 5px;" (click)="addAdmin()" type="button"
+            [disabled]="isSubmitted">Ajouter Administrateur</button>
+        <button class="btn btn-secondary" [disabled]="isSubmitted" (click)="resetPage()">Réinitialiser la page</button>
+    </div>
+
+    <!-- <div class="col-sm-12" *ngIf="!adminCanSeeRoles">
+        <app-alert type="danger" dismiss="true">
+            <h3>Vous ne posséde pas la permission d'affecter les rôles au administrateur!<br>
+                Vous pouvez que ajouter des administrateurs sans leurs rôles<br>
+                Veuillez contacter votre administrateur pour cette permission<br>
+
+            </h3>
+        </app-alert>
+    </div> -->
+</div>

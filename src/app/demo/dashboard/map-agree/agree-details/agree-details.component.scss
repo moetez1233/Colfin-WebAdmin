@@ -1,0 +1,32 @@
+i {
+    color: black;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.app-alert {
+    &.alert {
+        color: black;
+    }
+}
+
+img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.row {
+    margin: 0px;
+}
+
+.alert-border {
+    border: solid lightgrey 1px;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.card {
+    &.ng-star-inserted {
+        margin-bottom: 0px;
+    }
+}

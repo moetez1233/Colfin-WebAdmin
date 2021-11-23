@@ -1,0 +1,95 @@
+<app-card [options]="false" cardTitle="Details du reclamations">
+
+
+    <div style="height: 300px;">
+
+        <div class="row" style="width: 100%" *ngIf="initializing">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Id Claim</i></app-alert>
+            </div>
+            <div class="col-md-7">
+                <app-alert type="light"><i>{{clickedClaimParent.idUser}}</i></app-alert>
+            </div>
+        </div>
+        <div class="row" style="width: 100%" *ngIf="initializing">
+            <div class="col-md-5">
+                <app-alert type="light"><i> Administration</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i (click)="ReclamAdmininstration(justificationModal)">{{clickedAdministration.nomfr}}</i></app-alert>
+
+            </div>
+
+
+        </div>
+
+        <div class="row" style="width: 100%" *ngIf="initializing">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Image de reclamation </i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage>
+                </app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%" *ngIf="initializing">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Position </i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><img src="assets/images/map.png" #justifyingImage>
+                </app-alert>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="initializing">
+            <div class="col-md-5">
+                <i>Cotenu du reclamation</i>
+            </div>
+
+            <div class="col-md-5">
+                <perfect-scrollbar style="min-height: 5px;max-height: 100px;">
+                    <div *ngFor="let tag of claimTags;let userIndex=index">
+
+                        <i>{{tag}}</i>
+                    </div>
+
+                </perfect-scrollbar>
+
+            </div>
+        </div>
+
+    </div>
+
+</app-card>
+<app-ui-modal #justificationModal [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-12">
+            <app-map></app-map>
+        </div>
+
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal.hide();justification.value=''">Fermer</button>
+        </div>
+    </div>
+</app-ui-modal>
+
+<app-ui-modal #justificationModal1 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <img src="{{url}}" style="width: 50%;">
+
+
+
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>

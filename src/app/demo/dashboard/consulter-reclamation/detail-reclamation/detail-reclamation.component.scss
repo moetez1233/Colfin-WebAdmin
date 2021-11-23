@@ -1,0 +1,20 @@
+i {
+    color: black;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.app-alert {
+    &.alert {
+        color: black;
+    }
+}
+
+.row {
+    margin: 0px;
+}
+
+img {
+    width: 25px;
+    cursor: pointer;
+}

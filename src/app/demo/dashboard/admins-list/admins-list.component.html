@@ -1,0 +1,142 @@
+<app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
+<div *ngIf="!adminGotTheRole" class="col-sm-12">
+    <app-alert type="danger" dismiss="true" class="alert">
+        <h3>Vous ne posséde pas la permission de consulter les administrateurs!<br> Veuillez contacter votre administrateur pour cette permission</h3>
+    </app-alert>
+</div>
+<div *ngIf="adminGotTheRole" class="row">
+    <div class="col-sm-12 m-b-15">
+        <div id="main-search" class="main-search open">
+            <div class="input-group">
+                <input type="text" id="m-search" class="form-control" placeholder="Search . . ." (keyup)="verifyingSearch($event)">
+                <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text" (click)="Search()">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <app-card [options]="false" cardTitle="Liste des Administrateurs">
+            <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'" [style.min-height]="(window.innerHeight-350)+'px'">
+                <div class="col-md-12">
+                    <ng-container>
+                        <ng-container *ngFor="let admin of admins;let adminIndex=index;">
+                            <app-alert style="cursor: pointer;" [type]="adminsColor[adminIndex]" (mouseenter)="hoverOn(adminIndex)" (mouseleave)="hoverOff(adminIndex)" (click)="adminClicked(adminIndex)">
+
+                                <div class="row" style="margin-left: -20px;margin-right: -10px;">
+                                    <div id="searche"></div>
+                                    <i class="col-md-12 text-left">{{admin.userName}} </i>
+                                </div>
+                            </app-alert>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </perfect-scrollbar>
+        </app-card>
+    </div>
+    <div class="col-md-8">
+        <app-card [options]="false" cardTitle="Details de l'Administrateur">
+            <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'" [style.min-height]="(window.innerHeight-350)+'px'">
+                <div class="table-responsive" *ngIf="adminIndex!=-1">
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Statut</th>
+                                <th>{{clickedAdmin.accountStatut === 1 ?'Débloqué' : 'Bloqué'}}</th>
+                                <th style="text-align: right;" *ngIf="adminCanBlockUnblock">
+                                    <input style="width: 93px;" type="button" value="{{clickedAdmin.accountStatut === 1 ?'Bloquer' : 'Débloquer'}}" class="btn {{clickedAdmin.accountStatut === 1 ?'btn-danger' : 'btn-success'}}" (click)="blockOrUnblockAdmin($event)">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Administrateur Master</th>
+                                <th>{{clickedAdmin.isMaster ?'Oui' : 'Non'}}</th>
+                                <th style="text-align: right;">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>{{clickedAdmin.prenom}}</th>
+                                <th>
+                                    <!-- <img src="assets/images/showInfo.png" #justifyingImage -->
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <th>{{clickedAdmin.nom}}</th>
+                                <th style="text-align: right;">
+                                    <!-- <img src="assets/images/showInfo.png" #justifyingImage> -->
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Numéro de Téléphone</th>
+                                <th>{{clickedAdmin.phoneNumber}}</th>
+                                <th style="text-align: right;">
+                                    <img src="assets/images/showInfo.png" #justifyingImage1 (click)="justifying('phoneNumber','admin',justificationModal,justification,justifyingImage1)">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Adresse Email</th>
+                                <th>{{clickedRef.email}}</th>
+                                <th style="text-align: right;">
+                                    <img src="assets/images/showInfo.png" #justifyingImage2 (click)="justifying('email','ref',justificationModal,justification,justifyingImage2)">
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th>Rôle</th>
+                                <th>{{clickedAdmin.rolesGroupe ? clickedAdmin.rolesGroupe.length : 0}}</th>
+                                <th style="text-align: right;">
+                                    <img *ngIf="adminCanChangeRoles" src="assets/images/edit.png" (click)="editRolesPop.show();editRoles()">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Date de création</th>
+                                <th>{{timestampToDate(clickedAdmin.created)}}</th>
+                                <th style="text-align: right;">
+                                </th>
+                            </tr>
+                            <tr *ngIf="clickedAdmin.updated">
+                                <th>Derniere mise à jour</th>
+                                <th>{{timestampToDate(clickedAdmin.updated)}}</th>
+                                <th style="text-align: right;">
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </perfect-scrollbar>
+        </app-card>
+    </div>
+</div>
+
+
+
+<app-ui-modal #editRolesPop [dialogClass]="'modal-xl'" [containerClick]="false">
+    <div class="app-modal-body">
+        <div class="container" *ngIf="adminGotTheRole">
+            <app-roles></app-roles>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="editRolesPop.hide()">Close</button>
+        <button type="button" class="btn btn-primary" id="saveChangeBtn" (click)="saveChanges(editRolesPop)">Save
+      changes</button>
+    </div>
+</app-ui-modal>
+
+<app-ui-modal #justificationModal [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Justification pour voir la donnée cachée </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-12">
+            <input type="text" class="form-control" #justification placeholder="Justification">
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal.hide();justification.value=''">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="justify(justificationModal,justification)">Justifier</button>
+    </div>
+</app-ui-modal>

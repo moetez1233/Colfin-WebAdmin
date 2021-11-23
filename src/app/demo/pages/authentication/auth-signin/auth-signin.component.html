@@ -1,0 +1,32 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="card">
+      <div class="row align-items-center text-center">
+        <div class="col-md-12">
+          <div class="card-body">
+            <img src="assets/images/logo-dark.png" alt=""  class="img-fluid mb-4">
+            <h4 class="mb-3 f-w-400">Connexion</h4>
+            <form [formGroup]="registeForm" (ngSubmit)="onSubmit()" autocomplete="off">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                </div>
+                <input type="email" required class="form-control" formControlName="email" placeholder="Adresse Email">
+              </div>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                </div>
+                <input type="password" required class="form-control" formControlName="password" placeholder="Mot de passe">
+              </div>
+              <app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
+              <button class="btn btn-block btn-primary mb-4" type="submit" [disabled]="isSubmitted">Se Connecter</button>
+              <p class="mb-2 text-muted">Mot de passe oublié ? <a [routerLink]="['/auth/reset-password']"
+                  class="f-w-400">Réinitialiser</a></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

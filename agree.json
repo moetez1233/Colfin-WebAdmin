@@ -1,0 +1,24 @@
+{
+    "agrees": {
+        "k3hw6e80a7ijcem": {
+            "activity": "SalemPay",
+            "ag_latitude": 32.90485037924124,
+            "ag_longitude": 10.426247558153438,
+            "cache": 2000,
+            "id": "k3hw6e80a7ijcem",
+            "locationImage": "+22222222222.png",
+            "phoneNumber": "+22222222222",
+            "updated": 1586451017816
+        },
+        "k8bw34kb9xn99gh": {
+            "activity": "wael",
+            "ag_latitude": 32.90440122159918,
+            "ag_longitude": 10.425712577998638,
+            "cache": 0,
+            "id": "k8bw34kb9xn99gh",
+            "locationImage": "+21625488161.png",
+            "phoneNumber": "+21625488161",
+            "updated": 1586451017816
+        }
+    }
+}

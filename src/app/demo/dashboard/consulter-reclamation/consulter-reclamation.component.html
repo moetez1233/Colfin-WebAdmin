@@ -1,0 +1,481 @@
+<!-- poisition et photo du point financier-->
+<app-ui-modal #MapsAndPhoto [dialogClass]="'modal-xl'" [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Position et Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+
+
+        <div class="row" id="text">
+            <div class="{{clickedIndex!==-1 ? 'col-sm-6' : 'col-sm-10'}}">
+                <app-map></app-map>
+            </div>
+            <div class="col-md-6">
+                <app-card [options]="false" cardTitle="Details de l'agence">
+                    <perfect-scrollbar>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i id="text">image d'agence</i></app-alert>
+                            </div>
+                            <div class="col-md-2">
+                                <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="ReclamAdmininstration1(justificationModal3)">
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Id Agence</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.id}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Nip</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.nip}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Nom froncais</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.nomfr}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Numéro Téléphone</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.contact}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Derniere mise à jour</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{timestampToDate(clickedAdministration.update)}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </app-card>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="MapsAndPhoto.hide();removeAllMarkers()">Fermer</button>
+    </div>
+</app-ui-modal>
+<!-- ====================user information=========== -->
+<app-ui-modal #justificationModal [containerClick]="false" style="width: 95%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <app-map></app-map>
+            </div>
+
+        </div>
+
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal.hide();justification.value=''">Fermer</button>
+        </div>
+    </div>
+</app-ui-modal>
+<!-- ===========================end popup user==================== -->
+
+
+
+
+<div *ngIf="adminGotTheRole" class="row">
+    <div class="col-sm-12 m-b-15">
+        <div id="main-search" class="main-search open">
+            <div class="input-group">
+                <input type="text" id="m-search" class="form-control" placeholder="Search . . .">
+                <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <app-card [options]="false" cardTitle="Liste des reclamations">
+            <div style="height: 300px;">
+                <div class="col-md-12">
+                    <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
+                        <ng-container *ngFor="let CliamUser of CliamUsers;let adminIndex=index;">
+                            <app-alert style="cursor: pointer;" [type]="adminsColor[adminIndex]" (mouseenter)="hoverOn(adminIndex)" (mouseleave)="hoverOff(adminIndex)" (click)="ClaimClicked(adminIndex)">
+                                <div class="row" style="margin-left: -20px;margin-right: -10px;">
+                                    <i class="col-md-6 text-left">
+                                        {{CliamUser.idUser}}
+                                    </i>
+                                    <i class="col-md-6 text-right"> {{timestampToDate(CliamUser.created)}}</i>
+                                </div>
+                            </app-alert>
+                        </ng-container>
+                    </perfect-scrollbar>
+
+                </div>
+            </div>
+        </app-card>
+
+    </div>
+
+
+
+    <div class="col-md-7">
+        <app-card [options]="false" cardTitle="Details du reclamations">
+            <div style="height: 300px;">
+
+                <div class="row" style="width: 100%" *ngIf="initializing">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id Claim</i></app-alert>
+                    </div>
+                    <div class="col-md-7">
+                        <app-alert type="light"><i id="demo" (click)="ReclamAdmininstration3(justificationModal2)">{{clickedClaimParent.idUser}}-{{clickedClaimParent.created}}</i></app-alert>
+                    </div>
+                </div>
+                <div class="row" style="width: 100%" *ngIf="initializing">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i> Administration</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i id="demo" (click)="ReclamAdmininstration2(MapsAndPhoto)">{{clickedAdministration.nomfr}}</i></app-alert>
+
+                    </div>
+
+
+
+                </div>
+                <div class="row" style="width: 100%" *ngIf="initializing">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Image de reclamation </i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="ReclamAdmininstration1(justificationModal1)">
+                        </app-alert>
+                    </div>
+
+                </div>
+                <div class="row" style="width: 100%" *ngIf="initializing">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Satisfaction</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedClaimParent.satisfaction}}</i></app-alert>
+
+                    </div>
+                </div>
+                <div class="row" *ngIf="initializing">
+
+                    <perfect-scrollbar style="min-height: 5px;max-height: 90px;">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <i style="padding-left: 10px;">Cotenu du reclamation</i>
+                            </div>
+                            <div class="col-md-5">
+                                <div *ngFor="let tag of claimTags;let userIndex=index">
+
+
+                                    <i style="padding-left: 10px;">{{tag}}</i>
+
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div *ngFor="let type of icones"><img src="{{type}}"></div>
+
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-md-5">
+
+
+                            <div *ngFor="let tag of claimTags;let userIndex=index">
+
+
+                                <i style="padding-left: 10px;">{{tag}}</i>
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                        <div class="col-md-2">
+
+                            <div *ngFor="let type of icones"><img src="{{type}}"></div>
+
+                        </div>
+                    -->
+                    </perfect-scrollbar>
+                    <!--
+                    <div class="col-md-2">
+                        <perfect-scrollbar style="min-height: 5px;max-height: 100px;">
+                            <img src="{{img0}}"><br>
+                            <img src="{{img1}}"><br>
+                            <img src="{{img2}}"><br>
+                            <img src="{{img3}}"><br>
+                            <img src="{{img4}}"><br>
+                            <img src="{{img5}}"><br>
+                            <img src="{{img6}}"><br>
+
+
+                        </perfect-scrollbar>
+
+
+
+                    </div>
+                -->
+
+                    <!--
+                    <div class="col-md-2">
+                      <perfect-scrollbar style="min-height: 5px;max-height: 100px;">
+                      <img src="{{icone0}}">
+                      <img src="{{icone1}}">
+                      <img src="{{icone2}}">
+                      <img src="{{icone3}}">
+                      <img src="{{icone4}}">
+                      <img src="{{icone5}}">
+                      <img src="{{icone6}}">
+                      </perfect-scrollbar>
+
+
+
+                    </div>
+                    -->
+                </div>
+
+            </div>
+        </app-card>
+    </div>
+
+
+
+</div>
+<!--
+<app-ui-modal #justificationModal2 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <app-map></app-map>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal2.hide();justification.value=''">Fermer</button>
+        </div>
+    </div>
+</app-ui-modal>
+-->
+
+
+
+<app-ui-modal #justificationModal1 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <img src="{{url}}" style="width: 50%;">
+
+
+
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>
+
+<app-ui-modal #justificationModal3 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <img src="{{url1}}" style="width: 50%;">
+
+
+
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal3.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>
+<app-ui-modal #justificationModal2 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">les informations d'utilisateur </h5>
+    </div>
+    <div class="app-modal-body">
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Id User</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.id}}</i></app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Nom et Prénom</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.fullName}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Numéro de Téléphone</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.phoneNumber}}</i></app-alert>
+            </div>
+
+        </div>
+
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Solde</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.balance}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Email</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.email}}</i></app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Approuvé</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.approved == 2 ? 'OUI' : 'NON' }}</i>
+                </app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Statut</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedClaimUser.status}}</i>
+                </app-alert>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal2.hide();justification.value=''">Fermer</button>
+        </div>
+    </div>
+</app-ui-modal>
+
+
+
+
+
+
+<!--
+<div *ngIf="adminGotTheRole" class="row">
+
+
+    <div class="col-md-7">
+        <app-card [options]="false" cardTitle="Details du reclamations">
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Id Claim</i></app-alert>
+                </div>
+                <div class="col-md-7">
+                    <app-alert type="light"><i>{{clickedClaim .idUser}}</i></app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>id administration</i></app-alert>
+                </div>
+                <div class="col-md-7">
+                    <app-alert type="light"><i>{{clickedClaim.idAdministration}}</i></app-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <i>Cotenu du reclamation</i>
+                </div>
+                <div class="col-md-5">
+                    <div *ngFor="let tag of claimTags;let userIndex=index">
+                        <i>{{tag}}</i>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </app-card>
+    </div>
+</div>
+-->
+<!--
+<h1>teste </h1>
+<div class="col-md-4">
+    <app-card [options]="false" cardTitle="Liste des Utilisateurs">
+        <ngb-progressbar [value]="100" [striped]="true" [animated]="true" *ngIf="initUsers">
+        </ngb-progressbar>
+        <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'" [style.min-height]="(window.innerHeight-350)+'px'">
+
+            <ng-container *ngFor="let CliamUser of CliamUsers;let userIndex=index">
+                <ng-container>
+                    <app-alert style="cursor: pointer;" [type]="usersColor[userIndex]" (mouseenter)="hoverOnUsers(userIndex)" (mouseleave)="hoverOffUsers(userIndex)" (click)="userClicked(userIndex);clickedadministration(userIndex)">
+                        <div class="row">
+                            <i class="col-md-12"> {{CliamUser.idUser}}</i>
+
+                        </div>
+                    </app-alert>
+                </ng-container>
+            </ng-container>
+
+        </perfect-scrollbar>
+    </app-card>
+</div>
+-->
+<h1>hello</h1>

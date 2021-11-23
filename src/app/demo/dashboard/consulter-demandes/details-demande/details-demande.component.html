@@ -1,0 +1,520 @@
+<app-card [options]="false" cardTitle="Demande Details">
+
+    <perfect-scrollbar [style.max-height]="(window.innerHeight-315)+'px'" [style.min-height]="(window.innerHeight-315)+'px'">
+        <div>
+            <div class="row" *ngIf="demandeTypeSelected[0]">
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-10">
+                        <app-alert type="light"><i>Position sur Maps et Photo</i> </app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" (click)="consultAgree(MapsAndPhoto)">Voir</button>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de la Demande</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.id}}</i></app-alert>
+                    </div>
+
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.idUser}}</i></app-alert>
+                    </div>
+
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Email de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.parametreDemande.email}}</i></app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage1 (click)="justifying('email',justificationModal,justification,justifyingImage1)">
+                        </app-alert>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Numéro de téléphone de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.parametreDemande.phoneNumber}}</i>
+                        </app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage2 (click)="justifying('phoneNumber',justificationModal,justification,justifyingImage2)">
+                        </app-alert>
+                    </div>
+                </div>
+                <ng-container *ngIf="clickedDisplayDemande.status">
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 || clickedDisplayDemande.status===2) ? "Oui" : "Non"}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité le </i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{timestampToDate(clickedDisplayDemande.traitedTime)}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Décision</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 ) ? "Acceptée" : (clickedDisplayDemande.status===2 ? "Refusée":"Error")}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%" *ngIf="clickedDisplayDemande.status===2">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Description</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===2) ? clickedDisplayDemande.raison : ""}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité par</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{clickedDisplayDemande.traitedBy}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage3 (click)="justifying('traitedBy',justificationModal,justification,justifyingImage3)">
+                            </app-alert>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row" *ngIf="demandeTypeSelected[1]">
+                <div class="row" style="width: 100%">
+                    <div class="col-md-10">
+                        <app-alert type="light"><i>Photo de vérification</i> </app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" (click)="VerificationIdentity.show();consultPhoto()">Voir</button>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de la Demande</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.id}}</i></app-alert>
+                    </div>
+                    <!-- <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png"
+                                    (click)="justifying('id',justificationModal,justification)"></app-alert>
+                        </div> -->
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.idUser}}</i></app-alert>
+                    </div>
+                    <!-- <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png"
+                                    (click)="justifying('idUser',justificationModal,justification)"></app-alert>
+                        </div> -->
+                </div>
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Email de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.parametreDemande.email}}</i></app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage4 (click)="justifying('email',justificationModal,justification,justifyingImage4)">
+                        </app-alert>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Numéro de téléphone de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.parametreDemande.phoneNumber}}</i>
+                        </app-alert>
+                    </div>
+                    <div class="col-md-2">
+                        <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage5 (click)="justifying('phoneNumber',justificationModal,justification,justifyingImage5)">
+                        </app-alert>
+                    </div>
+                </div>
+                <ng-container *ngIf="clickedDisplayDemande.status">
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 || clickedDisplayDemande.status===2) ? "Oui" : "Non"}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité le </i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{timestampToDate(clickedDisplayDemande.traitedTime)}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Décision</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 ) ? "Acceptée" : (clickedDisplayDemande.status===2 ? "Refusée":"Error")}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%" *ngIf="clickedDisplayDemande.status===2">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Description</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===2) ? clickedDisplayDemande.raison : ""}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité par</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{clickedDisplayDemande.traitedBy}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage6 (click)="justifying('traitedBy',justificationModal,justification,justifyingImage5)">
+                            </app-alert>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row" *ngIf="demandeTypeSelected[2]">
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de la Demande</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.id}}</i></app-alert>
+                    </div>
+                    <!-- <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png"
+                                    (click)="justifying('id',justificationModal,justification)"></app-alert>
+                        </div> -->
+                </div>
+
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Id de l'Utilisateur</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{clickedDisplayDemande.idUser}}</i></app-alert>
+                    </div>
+                    <!-- <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png"
+                                    (click)="justifying('idUser',justificationModal,justification)"></app-alert>
+                        </div> -->
+                </div>
+                <div class="row" style="width: 100%">
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>Type Portfeuille</i></app-alert>
+                    </div>
+                    <div class="col-md-5">
+                        <app-alert type="light"><i>{{walletType[clickedDisplayDemande.parametreDemande.type]}}</i>
+                        </app-alert>
+                    </div>
+                    <!-- <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png"
+                                    (click)="justifying('idUser',justificationModal,justification)"></app-alert>
+                        </div> -->
+                </div>
+                <perfect-scrollbar>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-3">
+                            <app-alert type="light"><i></i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>En Cours</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Limit</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Totals</i></app-alert>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Operation</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.operation}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light">
+                                <i>{{this.clickedDisplayDemande.parametreDemande.operationLimit}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.operations}}</i>
+                            </app-alert>
+                        </div>
+
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Periode</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.period}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.periodLimit}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.periods}}</i>
+                            </app-alert>
+                        </div>
+
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Transfer</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.transfer}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light">
+                                <i>{{this.clickedDisplayDemande.parametreDemande.transferLimit}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.transfers}}</i>
+                            </app-alert>
+                        </div>
+
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>Retrait</i></app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.withdrawal}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light">
+                                <i>{{this.clickedDisplayDemande.parametreDemande.withdrawalLimit}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-3">
+                            <app-alert type="light"><i>{{this.clickedDisplayDemande.parametreDemande.withdrawals}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+                </perfect-scrollbar>
+                <ng-container *ngIf="this.clickedDisplayDemande.status">
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité le </i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{timestampToDate(clickedDisplayDemande.traitedTime)}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 || clickedDisplayDemande.status===2) ? "Oui" : "Non"}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Décision</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===1 ) ? "Acceptée" : (clickedDisplayDemande.status===2 ? "Refusée":"Error")}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%" *ngIf="clickedDisplayDemande.status===2">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Description</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{(clickedDisplayDemande.status===2) ? clickedDisplayDemande.raison : ""}}</i>
+                            </app-alert>
+                        </div>
+                    </div>
+
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-5">
+                            <app-alert type="light"><i>Traité par</i></app-alert>
+                        </div>
+                        <div class="col-md-5">
+                            <app-alert type="light">
+                                <i>{{clickedDisplayDemande.traitedBy}}</i>
+                            </app-alert>
+                        </div>
+                        <div class="col-md-2">
+                            <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage6 (click)="justifying('traitedBy',justificationModal,justification,justifyingImage6)">
+                            </app-alert>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </perfect-scrollbar>
+    <div class="row" *ngIf="adminCanTraitDemande">
+        <div class="col-md-12 text-center">
+            <!--  -->
+            <div *ngIf="clickedIndex!==-1 && clickedDisplayDemande.status !== 1 && clickedDisplayDemande.status !== 2 && clickedDisplayDemande.typeDemande !== 3">
+                <button type="button" class="btn btn-success" (click)="confirmeDemande()">Confirmer</button>
+                <button type="button" class="btn btn-danger" (click)="justificationRefuseModal.show()">Rejeter</button>
+            </div>
+        </div>
+    </div>
+
+</app-card>
+
+
+<app-ui-modal #MapsAndPhoto [dialogClass]="'modal-xl'" [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Position et Photo de l'agréé</h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <app-map></app-map>
+            </div>
+            <div class="col-md-6">
+                <app-agree-details></app-agree-details>
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="MapsAndPhoto.hide();removeAllMarkers()">Fermer</button>
+    </div>
+</app-ui-modal>
+
+
+
+
+<app-ui-modal #VerificationIdentity [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Photo de vérification</h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="" alt="Photo de vérification">
+            </div>
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="VerificationIdentity.hide()">Fermer</button>
+    </div>
+</app-ui-modal>
+
+<app-ui-modal #justificationModal [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Justification pour voir la donnée cachée </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-12">
+            <input type="text" class="form-control" #justification placeholder="Justification">
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal.hide();justification.value=''">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="justify(justificationModal,justification)">Justifier</button>
+    </div>
+</app-ui-modal>
+
+<app-ui-modal #justificationRefuseModal [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Justification pour Refuser la demande </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationRefuseModal.hide()"><span>&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-12">
+            <input type="text" class="form-control" #refuseJustification placeholder="Justification">
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationRefuseModal.hide();justification.value=''">Fermer</button>
+        <button type="button" class="btn btn-danger" (click)="justifyRefusing(justificationRefuseModal,refuseJustification)">Rejeter</button>
+    </div>
+</app-ui-modal>

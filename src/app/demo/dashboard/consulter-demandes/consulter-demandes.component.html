@@ -1,0 +1,51 @@
+<div class="row">
+    <!-- <div class="col-sm-12 m-b-15" *ngIf="notConsulting">
+        <div id="main-search" class="main-search open">
+            <div class="input-group">
+                <input type="text" id="m-search" class="form-control" #search placeholder="Search . . ."
+                    autocomplete="off">
+                <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text"
+                    (click)="Search()">
+                </span>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-md-4">
+
+        <app-card [options]="false" cardTitle="Liste des Demandes">
+            <div class="col-md-12 text-left" *ngIf="initializing">
+                <ngb-progressbar [value]="100" [striped]="true" [animated]="true">
+                </ngb-progressbar>
+            </div>
+            <div class="col-md-12 text-center" *ngIf="demandes.length==0 && !initializing">
+                <app-alert type="danger">Aucune donnée trouvée {{ search ? (search.value=="" ? "" : "pour " + "'"+search.value+"'") : ""}}
+                </app-alert>
+            </div>
+            <div id="mydemandliste">
+                <perfect-scrollbar [style.max-height]="(window.innerHeight-315)+'px'" [style.min-height]="(window.innerHeight-315)+'px'">
+                    <div class="col-md-12">
+                        <ng-container>
+                            <ng-container *ngFor="let demand of demandes;let demindex=index">
+                                <app-alert (mouseenter)="hoverOn(demindex)" (mouseleave)="hoverOff(demindex)" (click)="demClicked(demindex)" style="cursor: pointer;" [type]="demandesColor[demindex]">
+                                    <div class="row" style="margin-left: -20px;margin-right: -10px;">
+                                        <i class="col-md-6 text-left">
+                                            <img [src]=" demand.status ? (demand.status==1 ? 'assets/images/IconAccept.png' : 'assets/images/IconRefused.png') : 'assets/images/IconInProgress.png'"
+                                                [title]="demand.status ? (demand.status==1 ? 'Acceptée' : 'Refusée') : 'En Cours'">
+                                            {{demandeType[demand.typeDemande]}}
+                                        </i>
+                                        <i class="col-md-6 text-right"> {{timestampToDate(demand.created)}}</i>
+                                    </div>
+                                </app-alert>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </perfect-scrollbar>
+            </div>
+
+
+        </app-card>
+    </div>
+    <div class="col-md-8">
+        <app-details-demande></app-details-demande>
+    </div>
+</div>

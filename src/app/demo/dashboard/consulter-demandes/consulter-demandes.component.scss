@@ -1,0 +1,17 @@
+i{
+    color:black;
+    font-style: normal;
+    font-weight: bold;
+}
+.app-alert{
+    &.alert{
+        color:black;
+    }
+}
+img {
+   width:15px; 
+   cursor: pointer;
+}
+.row{
+    margin: 0px;
+}

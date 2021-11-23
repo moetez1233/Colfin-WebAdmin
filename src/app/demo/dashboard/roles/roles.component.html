@@ -1,0 +1,28 @@
+<div>
+    <app-card [options]="false" cardClass="tab-card" cardTitle="Rôles">
+        <div class="mb-4" *ngIf="!isLoaded">
+            <ngb-progressbar [value]="100" [striped]="true" [animated]="true"></ngb-progressbar>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col" *ngFor="let roleGroup of rolesGroupKeys;let roleGroupIndex=index;"
+                    title="{{roleGroup}}" id="{{roleGroup}}">
+                    <app-card cardTitle="{{roleGroup}}" [options]="false">
+                        <div *ngFor="let roles of rolesGroupe[roleGroupIndex];let rolesIndex=index;">
+                            <div class="custom-control custom-switch mb-3">
+                                <input type="checkbox" class="custom-control-input" id="{{roles[1]}}"
+                                    (change)="roleClick(roleGroupIndex,rolesIndex)"
+                                    [checked]="roleCheck(roleGroupIndex, rolesIndex)" [disabled]="isSubmitted">
+                                <label class="custom-control-label" for="{{roles[1]}}">
+                                    {{roles[0]}}</label>
+                            </div>
+                        </div>
+                    </app-card>
+                </div>
+
+            </div>
+
+        </div>
+
+    </app-card>
+</div>

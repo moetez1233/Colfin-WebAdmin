@@ -1,0 +1,70 @@
+{
+  "roles" : {
+    "Consultation" : {
+      
+      
+      "Dem-Consultation" : {
+        "description" : "Consulter les demandes",
+        "idRole" : "Dem-Consultation"
+      },
+      
+      "Role-Consultation" : {
+        "description" : "Consulter liste des roles",
+        "idRole" : "Role-Consultation"
+      },
+      
+      "Dashbord-Trace-Consultation" : {
+        "description" : "Consulter tableau de bord traçabilité",
+        "idRole" : "Dashbord-Trace-Consultation"
+      },
+      "Trans-Consultation" : {
+        "description" : "Consulter les Transaction",
+        "idRole" : "Trans-Consultation"
+      }
+    },
+    "Admin-Manager" : {
+      "Rec-Consultation" : {
+        "description" : "Consulter les réclamations",
+        "idRole" : "Rec-Consultation"
+      },
+      "Dashbord-Manager-Consultation" : {
+        "description" : "Consulter tableau de bord manager",
+        "idRole" : "Dashbord-Manager-Consultation"
+      },
+      "Client-Consultation" : {
+        "description" : "Consulter les clients",
+        "idRole" : "Client-Consultation"
+      },
+      "Admin-Consultation" : {
+        "description" : "Consulter liste des admins",
+        "idRole" : "Admin-Consultation"
+      },
+      "Add-admin" : {
+        "description" : "Ajouter nouveau admin",
+        "idRole" : "Add-admin"
+      },
+      "Block-admin" : {
+        "description" : "Bloquer admin",
+        "idRole" : "Block-admin"
+      }
+    },
+    "Traitement" : {
+      "Rec-Traitement" : {
+        "description" : "Traiter les Réclamations",
+        "idRole" : "Rec-Traitement"
+      },
+      "Certified-Request" : {
+        "description" : "Valider demande agréé",
+        "idRole" : "Certified-Request"
+      },
+      "Verified-Request" : {
+        "description" : "Valider demande être vérifié",
+        "idRole" : "Verified-Request"
+      },
+      "SearchCertified" : {
+        "description" : "Chercher les agréés",
+        "idRole" : "SearchCertified"
+      }
+    }
+  }
+}

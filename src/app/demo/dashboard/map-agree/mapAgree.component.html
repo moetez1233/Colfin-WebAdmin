@@ -1,0 +1,300 @@
+<div *ngIf="!adminGotTheRole" class="col-sm-12">
+    <app-alert type="danger" dismiss="true" class="alert">
+        <h3>Vous ne posséde pas la permission de consulter les agences!<br> Veusillez contacter votre administrateur pour cette permission</h3>
+    </app-alert>
+</div>
+<div id="child4" class="col-sm-12 m-b-15">
+    <div id="main-search" class="main-search open">
+
+
+        <div class="input-group">
+
+            <div class="dropdown">
+                <input type="text" placeholder="search" id="newsearch" style="width: 970px;" (click)="myFunction()" (keyup)="filterFunctionAdministration()" value="{{Nomfrcategori}}">
+
+
+
+                <div id="myDropdown" class="dropdown-content">
+                    <perfect-scrollbar [style.max-height]="(window.innerHeight-500)+'px'">
+                        <dl *ngFor="let administration of administrations;let administrationIndex=index;">
+                            <dt style="padding-left: 2%;" id="liste" (click)="clickedNomfr(administrationIndex)">{{administration.nip}}</dt>
+
+
+                        </dl>
+                        <dl *ngFor="let categorie of categories;let categorieIndex=index;">
+                            <dt style="padding-left: 2%;" id="liste" (click)="myFunction();clickedcaegories(categorieIndex)">{{categorie.nomfr}}</dt>
+                        </dl>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <!--
+        <div class="input-group">
+
+            <div class="dropdown">
+                <input type="text" placeholder="search" id="newsearch" (click)="myFunction()" (keyup)="filterFunctionAdministration()" value="{{Nomfrcategori}}">
+              
+
+
+                <div id="myDropdown" class="dropdown-content">
+                    <perfect-scrollbar [style.max-height]="(window.innerHeight-500)+'px'">
+                        <dl *ngFor="let administration of administrations;let administrationIndex=index;">
+                            <dt style="padding-left: 2%;" id="liste" (click)="clickedNomfr(administrationIndex);clickedMarkcer(justificationModal1)">{{administration.nip}}</dt>
+                       
+
+                        </dl>
+                        <dl *ngFor="let categorie of categories;let categorieIndex=index;">
+                            <dt style="padding-left: 2%;" id="liste" (click)="clickedMarkcer(justificationModal1,index);clickedcaegories(categorieIndex)">{{categorie.nomfr}}</dt>
+                        </dl>
+                    </perfect-scrollbar>
+                </div>
+            </div>
+            <div id="mypopup">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.show();justification.value=''">information</button>
+            </div>
+
+        </div>
+    -->
+    </div>
+</div>
+
+
+<div id="parent4" *ngIf="adminGotTheRole" class="row">
+    <div id="initialmap" class="col-sm-12">
+        <app-map></app-map>
+    </div>
+    <!--
+
+    <div class="col-sm-6" *ngIf="clickedIndex!==-1" style="padding-bottom:70%;">
+
+        <div class="col-md-12">
+            <app-card [options]="false" cardTitle="Details de l'agence">
+                <div style="height: 280px;">
+                    <div class="row">
+                        <div class="col-md-11">
+
+                        </div>
+                        <div class="col-md-1"> <img src="assets/images/close.png" (click)="close()" id="closeboutton">
+                        </div>
+                    </div>
+                    <app-agree-details></app-agree-details>
+                </div>
+
+            </app-card>
+        </div>
+
+    </div>
+-->
+</div>
+<dialog id="myDialog">
+    <h3> Les donnes d'agence </h3>
+    <!--
+    <button type="button" style="margin-top: -50px;" id="closepopupe" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="PopupAgence(x)"><span aria-hidden="false">&times;</span></button>
+    -->
+    <hr size="1" color="#60beeb">
+    <div>
+        <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'">
+            <!--
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-12 text-center">
+                            <app-alert type="light">
+                                <a target="_blank">
+                                    <img src="{{url}}" style="width: 60%;">
+                                </a>
+                            </app-alert>
+                        </div>
+                    
+                    </div>
+                -->
+
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>image d'agence</i></app-alert>
+                </div>
+                <div class="col-md-2">
+                    <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="showimage(justificationModal2)">
+                    </app-alert>
+                </div>
+            </div>
+
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Id Agence</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.id}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Nip</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.nip}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Categorie</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickNomfrCategorie.nomfr}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Adresse</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.Adresse}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Numéro Téléphone</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.contact}}</i>
+                    </app-alert>
+                </div>
+
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Derniere mise à jour</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{timestampToDate(clickedNomfre.update)}}</i>
+                    </app-alert>
+                </div>
+            </div>
+        </perfect-scrollbar>
+    </div>
+    <div style="text-align: right;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-top: 20px;" (click)="PopupAgence(x)">Fermer</button>
+    </div>
+
+
+</dialog>
+
+<!-- Popup information -->
+<app-ui-modal #justificationModal1 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Image </h5>
+        <!--information-->
+        <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'">
+            <!--
+                    <div class="row" style="width: 100%">
+                        <div class="col-md-12 text-center">
+                            <app-alert type="light">
+                                <a target="_blank">
+                                    <img src="{{url}}" style="width: 60%;">
+                                </a>
+                            </app-alert>
+                        </div>
+                    
+                    </div>
+                -->
+
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>image d'agence</i></app-alert>
+                </div>
+                <div class="col-md-2">
+                    <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="showimage(justificationModal2)">
+                    </app-alert>
+                </div>
+            </div>
+
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Id Agence</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.id}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Nip</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.nip}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Categorie</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickNomfrCategorie.nomfr}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Adresse</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.Adresse}}</i>
+                    </app-alert>
+                </div>
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Numéro Téléphone</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{clickedNomfre.contact}}</i>
+                    </app-alert>
+                </div>
+
+            </div>
+            <div class="row" style="width: 100%">
+                <div class="col-md-5">
+                    <app-alert type="light"><i>Derniere mise à jour</i></app-alert>
+                </div>
+                <div class="col-md-5">
+                    <app-alert type="light"><i>{{timestampToDate(clickedNomfre.update)}}</i>
+                    </app-alert>
+                </div>
+            </div>
+        </perfect-scrollbar>
+        <!--end information -->
+
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="PopupAgence(x)"><span aria-hidden="true">&times;</span></button>
+
+    </div>
+
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>
+<app-ui-modal #justificationModal2 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Image </h5>
+        <img src="{{url}}" style="width: 50%">
+
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal2.hide()"><span aria-hidden="true">&times;</span></button>
+
+    </div>
+
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal2.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>

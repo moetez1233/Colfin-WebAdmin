@@ -1,0 +1,157 @@
+i {
+    color: black;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.app-alert {
+    &.alert {
+        color: black;
+    }
+}
+
+img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.row {
+    margin: 0px;
+}
+
+.alert-border {
+    border: solid lightgrey 1px;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.card {
+    &.ng-star-inserted {
+        margin-bottom: 0px;
+    }
+}
+
+#demo {
+    color: blue;
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+#demo:hover {
+    text-decoration: underline;
+    color: blue;
+    font-size: 14px;
+}
+
+
+/* ============================= optimisation =========================== */
+
+#newsearch {
+    //width: 50px;
+    box-sizing: border-box;
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    //border-radius: 5px;
+    //border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    border: 2px solid #bbbbbb;
+    border-radius: 8px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 10px;
+    margin-left: 12px;
+    //padding: 14px 770px 12px 45px;
+}
+
+@media all and (min-width: 800px) and (max-width: 1280px) {
+    /* Rédigez vos propriétés CSS ici */
+    #newsearch {
+        background-color: red;
+        width: 900px
+    }
+}
+
+
+/* ============================================ autocomplet===============================================*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+#newsearch {
+    width: 1002px;
+    box-sizing: border-box;
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    //border-radius: 5px;
+    //border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    border: 2px solid #bbbbbb;
+    border-radius: 8px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 10px;
+    //padding: 14px 770px 12px 45px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    background-color: #ddd;
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    width: 1002px;
+    margin-left: 12px;
+    margin-top: -10px;
+    overflow: auto;
+    border: 2px solid #bbbbbb;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.dropdown-content dt {
+    color: black;
+    //padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown dt:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+
+/* ===================================================== end autocomplet ==================================================================*/

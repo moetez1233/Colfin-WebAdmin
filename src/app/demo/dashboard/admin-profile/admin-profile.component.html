@@ -1,0 +1,77 @@
+<app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [options]="false" [hidHeader]="true">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <div class="card">
+                        <img class="card-img-top" [src]="imageurl" alt="">
+                        <button [disabled]="isSubmitted" class="btn btn-primary"
+                            (click)="exampleModalPopoversLabel.show()">Changer</button>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <form [formGroup]="updateForm" (ngSubmit)="update()" autocomplete="off">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Adresse Email</label>
+                            <input type="email" class="form-control" [readonly]="true" [disabled]='true'
+                                value="{{email}}" style="cursor: not-allowed;">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputNom1">Nom</label>
+                            <input type="text" class="form-control" id="test" formControlName="nom"
+                                value="{{admin.nom}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPrenom1">Prénom</label>
+                            <input type="text" class="form-control" id="test" formControlName="prenom">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPhoneNumber1">Numéro Téléphone</label>
+                            <input type="tel" class="form-control" id="test" formControlName="phoneNumber">
+                        </div>
+                        <button class="btn btn-primary" [disabled]="isSubmitted" type="submit">Mise à jour</button>
+                    </form>
+                </div>
+                <app-ui-modal #exampleModalPopoversLabel [containerClick]="false">
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Changer la photo de profile</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="exampleModalPopoversLabel.hide()"><span aria-hidden="true">&times;</span></button>
+                        <div class="col-md-9">
+                            <div class="card">
+                                <img class="card-img-top" id="uploadedFile" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-modal-body">
+                        <div class="mb-4">
+                            <p>{{Uploadingstatus}}</p>
+                        </div>
+                        <div>
+                            <h5>Choisir une image</h5>
+                            <div class="custom-file">
+                                <input [disabled]="isUploading" type="file" class="custom-file-input"
+                                    id="validatedCustomFile" accept=".jpg,.jpeg,.png" (change)="fileLoaded($event)">
+                                <label class="custom-file-label" for="validatedCustomFile">image (.jpg .jpeg .png)
+                                    ...</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            (click)="exampleModalPopoversLabel.hide()">Fermer</button>
+                        <button type="button" class="btn btn-primary" [disabled]="fileIsSelected" id="saveChangeBtn"
+                            style="cursor: not-allowed;" (click)="saveChanges()">Sauvegarder les changement</button>
+                    </div>
+                </app-ui-modal>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-dark" [disabled]="isSent" (click)="sendResetPasswordMail()">Envoyer un e-mail
+                        de réinitialisation du mot de passe</button>
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>

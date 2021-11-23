@@ -1,0 +1,24 @@
+img {
+    width:25px; 
+    cursor: pointer;
+ }
+i{
+    color:black;
+    font-style: normal;
+    font-weight: bold;
+}
+.app-alert{
+    &.alert{
+        color:black;
+    }
+}
+
+.row{
+    margin: 0px;
+}
+
+th{
+    width: 50%;
+    border: 0;
+    padding: 0.5rem;
+}

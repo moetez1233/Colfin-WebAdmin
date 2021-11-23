@@ -1,0 +1,110 @@
+<perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'">
+    <!--
+            <div class="row" style="width: 100%">
+                <div class="col-md-12 text-center">
+                    <app-alert type="light">
+                        <a target="_blank">
+                            <img src="{{url}}" style="width: 60%;">
+                        </a>
+                    </app-alert>
+                </div>
+            
+            </div>
+        -->
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>image d'agence</i></app-alert>
+        </div>
+        <div class="col-md-2">
+            <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="justifying('phoneNumber',justificationModal1,justification,justifyingImage)">
+            </app-alert>
+        </div>
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Id Agence</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{clickedDisplayadministration.id}}</i>
+            </app-alert>
+        </div>
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Nip</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{clickedDisplayadministration.nip}}</i>
+            </app-alert>
+        </div>
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Categorie</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{clickedCategorie.nomfr}}</i>
+            </app-alert>
+        </div>
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Adresse</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{clickedDisplayadministration.Adresse}}</i>
+            </app-alert>
+        </div>
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Numéro Téléphone</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{clickedDisplayadministration.contact}}</i>
+            </app-alert>
+        </div>
+
+    </div>
+    <div class="row" style="width: 100%">
+        <div class="col-md-5">
+            <app-alert type="light"><i>Derniere mise à jour</i></app-alert>
+        </div>
+        <div class="col-md-5">
+            <app-alert type="light"><i>{{timestampToDate(clickedDisplayadministration.update)}}</i>
+            </app-alert>
+        </div>
+    </div>
+</perfect-scrollbar>
+
+
+<app-ui-modal #justificationModal [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Justification pour voir la donnée cachée </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal.hide()"><span aria-hidden="true">&times;</span></button>
+
+    </div>
+    <div class="app-modal-body">
+        <div class="col-md-12">
+            <input type="text" class="form-control" #justification placeholder="Justification">
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal.hide();justification.value=''">Fermer</button>
+        <button type="button" class="btn btn-primary" (click)="justify(justificationModal,justification)">Justifier</button>
+    </div>
+</app-ui-modal>
+<app-ui-modal #justificationModal1 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Image d'agence </h5>
+        <img src="{{url}}" style="width: 50%;">
+
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal1.hide()"><span aria-hidden="true">&times;</span></button>
+
+    </div>
+
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>

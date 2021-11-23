@@ -1,0 +1,499 @@
+<!-- Contenue du chaque reclamation -->
+<app-ui-modal #justificationModal2 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">les informations d'utilisateur </h5>
+    </div>
+
+
+    <div class="app-modal-body">
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Id User</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i id="demo" (click)="justificationModal4.show()">{{clickedclaimUser.idUser}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Administration</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i id="demo" (click)="ReclamAdmininstration(MapsAndPhoto)">{{clickedAdministration.nomfr}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Satisfaction</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedclaimUser.satisfaction}}</i></app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Image</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="justificationModal3.show();affichimage()">
+                </app-alert>
+            </div>
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>les reclamations</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <perfect-scrollbar style="min-height: 5px;max-height: 100px;">
+
+                    <div *ngFor="let tag of claimTags;let userIndex=index">
+                        <i style="padding-left: 10px;">{{tag}}</i>
+                    </div>
+                </perfect-scrollbar>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal2.hide();justification.value=''">Fermer</button>
+    </div>
+
+</app-ui-modal>
+<!-- contenue d'administaration du reclamation -->
+<app-ui-modal #MapsAndPhoto [dialogClass]="'modal-xl'" [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Position et Photo du point Financier </h5>
+    </div>
+    <div class="app-modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <app-map></app-map>
+            </div>
+            <div class="col-md-6">
+                <app-card [options]="false" cardTitle="Details de l'agence">
+
+                    <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'">
+
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>image d'agence</i></app-alert>
+                            </div>
+                            <div class="col-md-2">
+                                <app-alert type="light"><img src="assets/images/showimage.png" #justifyingImage (click)="justificationModal1.show();affichimage()">
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Id Agence</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.id}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Nip</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.nip}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Nom froncais</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.nomfr}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Adresse</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.adresse}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Numéro Téléphone</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{clickedAdministration.contact}}</i>
+                                </app-alert>
+                            </div>
+                            <div class="col-md-2">
+                                <app-alert type="light"><img src="assets/images/showInfo.png" #justifyingImage>
+                                </app-alert>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>Derniere mise à jour</i></app-alert>
+                            </div>
+                            <div class="col-md-5">
+                                <app-alert type="light"><i>{{timestampToDate(clickedAdministration.update)}}</i>
+                                </app-alert>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                </app-card>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="MapsAndPhoto.hide();removeAllMarkers()">Fermer</button>
+    </div>
+</app-ui-modal>
+<!--end affichage contenue d'administaration du reclamation  -->
+<div *ngIf="!adminGotTheRole" class="col-sm-12">
+    <app-alert type="danger" dismiss="true" class="alert">
+        <h3>Vous ne posséde pas la permission de consulter les utilisateurs!<br> Veuillez contacter votre administrateur pour cette permission</h3>
+    </app-alert>
+</div>
+
+
+<div *ngIf="adminGotTheRole" class="row">
+
+
+    <div class="dropdown">
+
+        <input type="text" placeholder="Search.." id="newsearch" style="width: 1020px;" (click)="myFunction()" (keyup)="filterFunction()" value="{{PhoneUser}}">
+
+        <div id="myDropdown" class="dropdown-content" style="width: 1019px;">
+            <perfect-scrollbar [style.max-height]="(window.innerHeight-500)+'px'">
+                <dl *ngFor="let user of users;let userIndex=index">
+                    <dt style="padding-left: 2%;" id="liste" (click)="userClicked(userIndex)">{{user.phoneNumber}}</dt>
+                </dl>
+
+            </perfect-scrollbar>
+        </div>
+    </div>
+
+    <!--
+
+    <div class="col-md-4">
+        <app-card [options]="false" cardTitle="Liste des Utilisateurs">
+            <ngb-progressbar [value]="100" [striped]="true" [animated]="true" *ngIf="initUsers">
+            </ngb-progressbar>
+            <perfect-scrollbar [style.max-height]="(window.innerHeight-350)+'px'" [style.min-height]="(window.innerHeight-350)+'px'">
+                <ng-container *ngFor="let user of users;let userIndex=index">
+                    <ng-container *ngIf="phoneNumberIsService(user.phoneNumber)">
+                        <app-alert style="cursor: pointer;" [type]="usersColor[userIndex]" (mouseenter)="hoverOnUsers(userIndex)" (mouseleave)="hoverOffUsers(userIndex)" (click)="userClicked(userIndex);clickedadministration(userIndex)">
+                            <div class="row">
+                                <i class="col-md-12"> {{user.phoneNumber}}</i>
+
+                            </div>
+                        </app-alert>
+                    </ng-container>
+                </ng-container>
+            </perfect-scrollbar>
+        </app-card>
+    </div>
+-->
+    <div class="col-md-12">
+
+        <app-card [options]="false" cardTitle="Détails de l'Utilisateur">
+            <div id="contenuUtlisateur">
+                <div [style.max-height]="(window.innerHeight-350)+'px'" [style.min-height]="(window.innerHeight-350)+'px'">
+                    <div id="loading">
+                        <!-- <ngb-progressbar [value]="100" [striped]="true" [animated]="true" *ngIf="initDems || initTrans">
+                    </ngb-progressbar> -->
+                    </div>
+
+                    <ngb-tabset *ngIf="clickedUserIndex!==-1">
+                        <ngb-tab title="Informations">
+                            <ng-template ngbTabContent>
+
+                                <perfect-scrollbar [style.max-height]="(window.innerHeight-410)+'px'" [style.min-height]="(window.innerHeight-410)+'px'">
+                                    <div class="row" style="width: 100%">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Id User</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.id}}</i></app-alert>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="width: 100%" *ngIf="clickedUser.fullName">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Nom et Prénom</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.fullName}}</i></app-alert>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row" style="width: 100%" *ngIf="clickedUser.fullName">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Numéro de Téléphone</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.phoneNumber}}</i></app-alert>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <app-alert type="light"><img #justificationImg [src]="'assets/images/showInfo.png'" (click)="justifying('phoneNumber',justificationModal,justification,justificationImg)">
+                                            </app-alert>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" style="width: 100%">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Solde</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.balance}}</i></app-alert>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <app-alert type="light"><img src="assets/images/showInfo.png" #justificationImg (click)="justifying('balance',justificationModal,justification,justificationImg)">
+                                            </app-alert>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="width: 100%" *ngIf="clickedUser.email">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Email</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.email}}</i></app-alert>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <app-alert type="light"><img src="assets/images/showInfo.png" #justificationImg (click)="justifying('email',justificationModal,justification,justificationImg)">
+                                            </app-alert>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="width: 100%">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Approuvé</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.approved == 2 ? 'OUI' : 'NON' }}</i>
+                                            </app-alert>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="width: 100%">
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>Statut</i></app-alert>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <app-alert type="light"><i>{{clickedUser.status}}</i>
+                                            </app-alert>
+                                        </div>
+
+                                    </div>
+
+
+                                </perfect-scrollbar>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Demandes" *ngIf="adminCanSeeDemandes">
+                            <ng-template ngbTabContent>
+                                <ngb-progressbar [value]="100" [striped]="true" [animated]="true" *ngIf="initDems">
+                                </ngb-progressbar>
+                                <perfect-scrollbar [style.max-height]="(window.innerHeight-410)+'px'" [style.min-height]="(window.innerHeight-410)+'px'">
+                                    <div class="alert-border m-t-5" *ngFor="let demande of userLastDemandes;let demindex=index">
+                                        <app-alert style="cursor: pointer;margin-top: 10px;" [type]="'light'" (click)="DemandeDetails.show()" (click)="showDemandeDetails(demindex)">
+                                            <!-- (click)="navigate('dashboard/consult-demande',demande.idUser,demande.id)" -->
+                                            <div class="row">
+                                                <i class="col-md-6 text-left">
+                                                <img [src]=" demande.status ? (demande.status==1 ? 'assets/images/IconAccept.png' : 'assets/images/IconRefused.png') : 'assets/images/IconInProgress.png'"
+                                                    [title]="demande.status ? (demande.status==1 ? 'Acceptée' : 'Refusée') : 'En Cours'">
+                                                {{demandeType[demande.typeDemande]}}
+                                            </i>
+                                                <i class="col-md-6 text-right"> {{timestampToDate(demande.created)}}</i>
+                                            </div>
+                                        </app-alert>
+                                    </div>
+                                </perfect-scrollbar>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Reclamation" *ngIf="adminCanSeeDemandes">
+                            <ng-template ngbTabContent>
+                                <ngb-progressbar [value]="100" [striped]="true" [animated]="true" *ngIf="initClaim">
+                                </ngb-progressbar>
+
+                                <perfect-scrollbar [style.max-height]="(window.innerHeight-410)+'px'" [style.min-height]="(window.innerHeight-410)+'px'">
+                                    <div class="alert-border m-t-5" *ngFor="let userLastClaim of userLastClaims;let demindex=index">
+                                        <div class="row">
+                                            <i class="col-md-6 text-left" (click)="clickedReclamUser(demindex);ReclamAdmininstration2(justificationModal2)">
+    
+                                        {{userLastClaim.idUser}}-{{userLastClaim.created}}
+                                    </i>
+                                            <i class="col-md-6 text-right"> {{timestampToDate(userLastClaim.created)}}</i>
+                                        </div>
+                                    </div>
+                                </perfect-scrollbar>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+
+                </div>
+            </div>
+        </app-card>
+    </div>
+</div>
+
+
+
+
+
+<!-- ============================= pour afficher le contenu du demande =================== -->
+<app-ui-modal #DemandeDetails [dialogClass]="'modal-xl'" [containerClick]="false">
+    <div class="app-modal-body">
+        <app-details-demande></app-details-demande>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="DemandeDetails.hide()">Fermer</button>
+
+    </div>
+</app-ui-modal>
+<!-- ============================== end affichchage contenu demande =======================-->
+
+
+
+
+<!-- afficher l'image de l'administration -->
+<app-ui-modal #justificationModal1 [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Image </h5>
+        <img src="{{url}}" style="width: 60%;">
+
+
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="justificationModal1.hide()"><span aria-hidden="true">&times;</span></button>
+
+    </div>
+
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal1.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>
+<!-- afficher l'image de l'administration -->
+<app-ui-modal #justificationModal3 [containerClick]="false">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Image </h5>
+        <img src="{{url1}}" style="width: 60%;">
+    </div>
+
+
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal3.hide();justification.value=''">Fermer</button>
+    </div>
+</app-ui-modal>
+
+<!--end affichage d'image du administrateur -->
+<!-- l'affiche user reclamation -->
+<app-ui-modal #justificationModal4 [containerClick]="false" style="width: 70%;">
+    <div class="app-modal-header">
+        <h5 class="modal-title">les informations d'utilisateur </h5>
+    </div>
+    <div class="app-modal-body">
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Id User</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.id}}</i></app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Nom et Prénom</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.fullName}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Numéro de Téléphone</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.phoneNumber}}</i></app-alert>
+            </div>
+
+        </div>
+
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Solde</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.balance}}</i></app-alert>
+            </div>
+
+        </div>
+
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Email</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.email}}</i></app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Approuvé</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.approved == 2 ? 'OUI' : 'NON' }}</i>
+                </app-alert>
+            </div>
+
+        </div>
+        <div class="row" style="width: 100%">
+            <div class="col-md-5">
+                <app-alert type="light"><i>Statut</i></app-alert>
+            </div>
+            <div class="col-md-5">
+                <app-alert type="light"><i>{{clickedUser.status}}</i>
+                </app-alert>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="app-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="justificationModal4.hide();justification.value=''">Fermer</button>
+        </div>
+    </div>
+</app-ui-modal>
+<!--  end l'affiche d-user reclamation -->
